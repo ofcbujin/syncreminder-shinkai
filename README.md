@@ -110,7 +110,6 @@ SyncMinder follows **Clean Architecture** principles with a modular feature-base
 
 | Pattern | Usage |
 |---|---|
-| **MVVM** | ViewModels expose `StateFlow` consumed by Composables |
 | **Repository** | Abstracts data sources (Firestore, Room, API) behind interfaces |
 | **Use Cases** | Single-responsibility business logic (e.g., `ProcessVoiceCommandUseCase`) |
 | **Dependency Injection** | Koin for multiplatform DI |
@@ -369,55 +368,6 @@ The `ProcessVoiceCommandUseCase` sends voice transcripts to the **Google Gemma 3
 
 Navigation uses **AndroidX Navigation 3** with a serializable `Route` sealed interface and `NavBackStack` management.
 
----
-
-## Getting Started
-
-### Prerequisites
-
-- JDK 17 or higher
-- Android Studio Ladybug or later
-- Xcode 15+ (for iOS builds)
-- [KDoctor](https://github.com/Kotlin/kdoctor) to verify your environment
-- Firebase project with Firestore, Auth, and FCM configured
-
-### Setup
-
-1. Clone the repository
-2. Add `local.properties` with your Android SDK path:
-   ```properties
-   sdk.dir=/path/to/Android/sdk
-   ```
-3. Add `google-services.json` (Android) and `GoogleService-Info.plist` (iOS) from your Firebase project
-4. Configure Gemma 3n key in the appropriate configuration file
-
-### Android
-
-```bash
-# Run on device/emulator
-./gradlew :composeApp:installDebug
-
-# Build APK
-./gradlew :composeApp:assembleDebug
-# Output: composeApp/build/outputs/apk/debug/composeApp-debug.apk
-
-# Run tests
-./gradlew :composeApp:connectedDebugAndroidTest
-```
-
-### iOS
-
-```bash
-# Open in Xcode
-open iosApp/iosApp.xcproject
-
-# Or use KMM plugin in Android Studio
-
-# Run simulator tests
-./gradlew :composeApp:iosSimulatorArm64Test
-```
-
----
 
 ## License
 
