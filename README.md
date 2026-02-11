@@ -211,7 +211,7 @@ data class Reminder(
 **Key Use Cases:**
 - `AddReminderUseCase` — Creates reminder locally and syncs to Firestore
 - `CompleteReminderUseCase` — Marks done, triggers silent push to cancel alarms on other devices
-- `ProcessVoiceCommandUseCase` — Parses natural language via Gemini AI into structured reminder data
+- `ProcessVoiceCommandUseCase` — Parses natural language via Gemma 3n into structured reminder data
 
 **UI Components:**
 - `HomeScreen` — Dashboard with today's tasks, scheduled reminders, personal lists
