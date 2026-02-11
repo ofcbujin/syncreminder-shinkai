@@ -46,7 +46,7 @@ Users who own multiple devices (phone, tablet, work phone) often miss reminders 
 
 ### 2. AI-Powered Voice Commands
 - Natural language task creation: speak a reminder, and the AI parses title, date, time, priority, and recurrence
-- Powered by **Google Gemini API** with structured JSON output
+- Powered by **Google Gemmma** with structured JSON output
 - Automatic category matching and suggestion for new categories
 - Animated voice command overlay with real-time transcript display
 
@@ -131,7 +131,7 @@ SyncMinder follows **Clean Architecture** principles with a modular feature-base
 | **Authentication** | Firebase Auth (Google Sign-In, Apple Sign-In) |
 | **Push Notifications** | Firebase Cloud Messaging (FCM) |
 | **Cloud Functions** | Firebase Cloud Functions (Node.js) |
-| **AI/ML** | Google Gemini API (voice command parsing) |
+| **AI/ML** | Google Gemma 3n (voice command parsing) |
 | **Dependency Injection** | Koin |
 | **Serialization** | Kotlinx Serialization |
 | **Async** | Kotlin Coroutines + Flow |
@@ -321,7 +321,7 @@ Guest Mode ──▶ Google/Apple Sign-In ──▶ Authenticated User
 
 ## AI Voice Commands
 
-The `ProcessVoiceCommandUseCase` sends voice transcripts to the **Google Gemini API** with a structured prompt that extracts:
+The `ProcessVoiceCommandUseCase` sends voice transcripts to the **Google Gemma 3n** with a structured prompt that extracts:
 
 | Field | Description |
 |---|---|
@@ -389,7 +389,7 @@ Navigation uses **AndroidX Navigation 3** with a serializable `Route` sealed int
    sdk.dir=/path/to/Android/sdk
    ```
 3. Add `google-services.json` (Android) and `GoogleService-Info.plist` (iOS) from your Firebase project
-4. Configure Gemini API key in the appropriate configuration file
+4. Configure Gemma 3n key in the appropriate configuration file
 
 ### Android
 
