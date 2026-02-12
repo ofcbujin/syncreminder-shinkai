@@ -129,6 +129,7 @@ SyncMinder follows **Clean Architecture** principles with a modular feature-base
 | **Cloud Database** | Firebase Firestore |
 | **Authentication** | Firebase Auth (Google Sign-In, Apple Sign-In) |
 | **Push Notifications** | Firebase Cloud Messaging (FCM) |
+| **Subscription & Billing** | RevenueCat (Purchases KMP) |
 | **Cloud Functions** | Firebase Cloud Functions (Node.js) |
 | **AI/ML** | Google Gemma 3n (voice command parsing) |
 | **Dependency Injection** | Koin |
@@ -161,7 +162,6 @@ SyncMinder/
 │       │       │   ├── platform/           # expect declarations
 │       │       │   ├── lifecycle/          # AppLifecycleObserver
 │       │       │   ├── analytics/          # Analytics tracking
-│       │       │   └── ads/               # Ad integration
 │       │       ├── di/                     # Koin modules per feature
 │       │       ├── features/
 │       │       │   ├── auth/               # Authentication (Login/Signup)
@@ -178,6 +178,7 @@ SyncMinder/
 │       └── iosMain/             # iOS-specific implementations
 │           └── kotlin/          # NotificationScheduler, Platform, etc.
 ├── iosApp/                      # iOS app entry point (SwiftUI wrapper)
+├── shinkaibilling/              # Internal billing library (RevenueCat)
 ├── functions/                   # Firebase Cloud Functions
 └── build.gradle.kts
 ```
@@ -262,6 +263,15 @@ Visual analytics for task completion habits:
 2. **Feature Overview** — Key capabilities with scroll support
 3. **Voice Command Preview** — Animated mic pulse with transcript demo
 4. **Login/Signup** — Integrated social auth with skip option
+
+### `shinkaibilling` — Subscription Architecture
+
+The app uses a dedicated internal multiplatform library for subscription management, abstracting the **RevenueCat** integration.
+
+- **Technology**: Built on [Purchases KMP](https://github.com/RevenueCat/purchases-kmp) (Version `2.2.15+17.25.0`).
+- **Identity Sync**: User IDs are synchronized between Firebase Auth and RevenueCat via `BillingIdentityService.logIn(appUserId)`.
+- **Entitlement Verification**: Access to "Pro" features (like multi-device sync) is controlled by the `SyncMinder Pro` entitlement ID.
+- **Service Layer**: `BillingIdentityServiceImpl` provides a unified reactive flow (`isPro()`) to observe subscription status throughout the app.
 
 ---
 
