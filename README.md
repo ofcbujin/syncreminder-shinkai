@@ -89,22 +89,8 @@ Users who own multiple devices (phone, tablet, work phone) often miss reminders 
 
 SyncMinder follows **Clean Architecture** principles with a modular feature-based structure:
 
-```
-┌─────────────────────────────────────────────────┐
-│                  Presentation                     │
-│  (Composables, ViewModels, UI State)             │
-├─────────────────────────────────────────────────┤
-│                  Domain Layer                     │
-│  (Use Cases, Repository Interfaces, Models)      │
-├─────────────────────────────────────────────────┤
-│                  Data Layer                       │
-│  (Repository Impls, Firestore, Room DB, API)     │
-├─────────────────────────────────────────────────┤
-│              Platform-Specific                    │
-│  (Android: BroadcastReceiver, AlarmManager)       │
-│  (iOS: UNUserNotificationCenter)                 │
-└─────────────────────────────────────────────────┘
-```
+![alt](https://raw.githubusercontent.com/ofcbujin/syncreminder-shinkai/main/images/clean_architecturepng.png)
+
 
 ### Design Patterns
 
@@ -277,20 +263,8 @@ The app uses a dedicated internal multiplatform library for subscription managem
 
 ## Data Flow & Synchronization
 
-```
-┌──────────────┐     ┌──────────────┐     ┌──────────────────┐
-│   Device A   │────▶│   Firestore  │────▶│ Cloud Functions  │
-│  (Android)   │◀────│   (Source    │     │  (Trigger on     │
-│              │     │   of Truth)  │     │   write/update)  │
-└──────────────┘     └──────────────┘     └────────┬─────────┘
-                           ▲                       │
-                           │                       ▼
-┌──────────────┐           │              ┌──────────────────┐
-│   Device B   │───────────┘              │    FCM Silent    │
-│    (iOS)     │◀─────────────────────────│   Push to all    │
-│              │                          │   other devices  │
-└──────────────┘                          └──────────────────┘
-```
+![alt](https://raw.githubusercontent.com/ofcbujin/syncreminder-shinkai/main/images/dataFlowSync.png)
+
 
 1. **Reminder Created** → Saved to Room DB (local) + Firestore (cloud)
 2. **Firestore Trigger** → Cloud Function detects new document
